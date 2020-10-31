@@ -55,7 +55,16 @@
             android:id="@+id/button_connect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:text="@string/connect" />
+        <Button
+            android:id="@+id/button_disconnect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="@string/disconnect" />
     </LinearLayout>
 
     <LinearLayout
@@ -68,7 +77,8 @@
             android:id="@+id/button_step"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:text="@string/step"
             tools:ignore="ButtonStyle" />
 
@@ -76,7 +86,8 @@
             android:id="@+id/button_sleep"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:text="@string/sleep"
             tools:ignore="ButtonStyle" />
 
@@ -84,10 +95,19 @@
             android:id="@+id/button_heart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:text="@string/heart"
             tools:ignore="ButtonStyle" />
 
     </LinearLayout>
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/text_information"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    </ScrollView>
 
 </LinearLayout>

@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onLeScan(BluetoothDevice bluetoothDevice, int rssi) {
                     Log.i(TAG, "deviceName : " + bluetoothDevice.getName() + " MAC : " + bluetoothDevice.getAddress() + " rssi :" + rssi);
-                    Toast.makeText(MainActivity.this, "deviceName : " + bluetoothDevice.getName() + " MAC : " + bluetoothDevice.getAddress() + " rssi :" + rssi, Toast.LENGTH_SHORT).show();
                     for (Device device : deviceList) {
                         if (device.getName().equals(bluetoothDevice.getName())) {
                             return;

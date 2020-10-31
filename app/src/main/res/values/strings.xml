@@ -6,4 +6,5 @@
     <string name="sleep">Sleep</string>
     <string name="heart">Heart</string>
     <string name="connect">Connect</string>
+    <string name="disconnect">Disconnect</string>
 </resources>
