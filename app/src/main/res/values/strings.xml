@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">SmartBandSDKDemo</string>
+    <string name="start_scan">Start Scan</string>
+    <string name="stop_scan">Stop Scan</string>
+    <string name="step">Step</string>
+    <string name="sleep">Sleep</string>
+    <string name="heart">Heart</string>
+    <string name="connect">Connect</string>
+</resources>
