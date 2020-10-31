@@ -54,16 +54,16 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button_connect"
-            android:layout_width="wrap_content"
+            android:id="@+id/button_pin"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:text="@string/connect" />
+            android:text="@string/pin" />
 
         <Button
             android:id="@+id/button_disconnect"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
@@ -78,7 +78,7 @@
 
         <Button
             android:id="@+id/button_step"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
@@ -87,7 +87,7 @@
 
         <Button
             android:id="@+id/button_sleep"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
@@ -96,7 +96,7 @@
 
         <Button
             android:id="@+id/button_heart"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
@@ -117,6 +117,7 @@
 
         <TextView
             android:padding="20dp"
+            android:gravity="center"
             android:id="@+id/text_information"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

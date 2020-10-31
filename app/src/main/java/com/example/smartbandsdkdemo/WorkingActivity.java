@@ -1,5 +1,6 @@
 package com.example.smartbandsdkdemo;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,7 +25,7 @@ import static cn.appscomm.ota.util.OtaUtil.byteArrayToHexString;
 
 public class WorkingActivity extends AppCompatActivity {
     TextView txt_name, txt_mac, txt_info;
-    Button btn_connect, btn_step, btn_sleep, btn_heart, btn_disconnect;
+    Button btn_pin, btn_step, btn_sleep, btn_heart, btn_disconnect;
     String TAG = "Working Activity";
     ProgressBar progressBar;
 
@@ -34,14 +35,16 @@ public class WorkingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_working);
         findViewByIds();
         progressBar.setVisibility(View.GONE);
-
+        progressBar.setVisibility(View.VISIBLE);
+        Toast.makeText(WorkingActivity.this, "Connecting....", Toast.LENGTH_SHORT).show();
+        BluetoothSDK.connectByMAC(resultCallBack, txt_mac.getText().toString());
     }
 
     public void findViewByIds() {
         txt_name = findViewById(R.id.text_device_name_working);
         txt_mac = findViewById(R.id.text_device_mac_working);
         txt_info = findViewById(R.id.text_information);
-        btn_connect = findViewById(R.id.button_connect);
+        btn_pin = findViewById(R.id.button_pin);
         btn_step = findViewById(R.id.button_step);
         btn_sleep = findViewById(R.id.button_sleep);
         btn_heart = findViewById(R.id.button_heart);
@@ -54,13 +57,15 @@ public class WorkingActivity extends AppCompatActivity {
         txt_name.setText(name);
         txt_mac.setText(mac);
 
-        btn_connect.setOnClickListener(view -> {
-            progressBar.setVisibility(View.VISIBLE);
-            Toast.makeText(WorkingActivity.this, "Connecting....", Toast.LENGTH_SHORT).show();
-            BluetoothSDK.connectByMAC(resultCallBack, txt_mac.getText().toString());
+        btn_pin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                txt_info.setText("");
+                progressBar.setVisibility(View.VISIBLE);
+                BluetoothSDK.getBatteryPower(resultCallBack);
+            }
         });
         btn_disconnect.setOnClickListener(view -> {
-
             Toast.makeText(WorkingActivity.this, "Đang tính toán....", Toast.LENGTH_SHORT).show();
             BluetoothSDK.disConnect(resultCallBack);
         });
@@ -85,6 +90,7 @@ public class WorkingActivity extends AppCompatActivity {
     }
 
     ResultCallBack resultCallBack = new ResultCallBack() {
+        @SuppressLint("SetTextI18n")
         @Override
         public void onSuccess(int resultType, Object[] objects) {
             switch (resultType) {
@@ -112,6 +118,12 @@ public class WorkingActivity extends AppCompatActivity {
                 case ResultCallBack.TYPE_DISCONNECT:
                     Toast.makeText(WorkingActivity.this, "disconnected", Toast.LENGTH_SHORT).show();
                     Log.i(TAG, "disconnected");
+                    break;
+                case ResultCallBack.TYPE_GET_BATTERY_POWER:
+                    progressBar.setVisibility(View.GONE);
+                    txt_info.setText("Mức pin hiện tại: " + objects[0] +"%");
+                    Toast.makeText(WorkingActivity.this, "battery power : " + objects[0], Toast.LENGTH_SHORT).show();
+                    Log.i(TAG, "battery power : " + objects[0]);
                     break;
                 case ResultCallBack.TYPE_GET_SLEEP_DATA:
                     progressBar.setVisibility(View.GONE);
