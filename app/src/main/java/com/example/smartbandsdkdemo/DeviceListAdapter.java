@@ -46,7 +46,6 @@ public class DeviceListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 public void onClick(View view) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     builder.setPositiveButton("Yes", (dialog, id) -> {
-                        Toast.makeText(context, "Select the device:" + deviceList.get(position).getName(), Toast.LENGTH_SHORT).show();
                         final Intent intent = new Intent(context, WorkingActivity.class);
                         intent.putExtra("devicename",  deviceList.get(position).getName());
                         intent.putExtra("devicemac",  deviceList.get(position).getMac());

@@ -14,17 +14,18 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="DeviceName:"
-            android:layout_margin="5dp"/>
+            android:layout_margin="5dp"
+            android:text="DeviceName:" />
 
         <TextView
             android:id="@+id/text_device_name_working"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:textColor="#FFE16E1A"
-            android:textSize="18sp"
-            android:layout_margin="5dp"/>
+            android:textSize="18sp" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,17 +35,18 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Mac Address:"
-            android:layout_margin="5dp"/>
+            android:layout_margin="5dp"
+            android:text="Mac Address:" />
 
         <TextView
             android:id="@+id/text_device_mac_working"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:textColor="#FFE16E1A"
-            android:textSize="18sp"
-            android:layout_margin="5dp"/>
+            android:textSize="18sp" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -58,6 +60,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:text="@string/connect" />
+
         <Button
             android:id="@+id/button_disconnect"
             android:layout_width="wrap_content"
@@ -101,13 +104,22 @@
             tools:ignore="ButtonStyle" />
 
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-    <TextView
-        android:id="@+id/text_information"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+
+        <TextView
+            android:padding="20dp"
+            android:id="@+id/text_information"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </ScrollView>
 
 </LinearLayout>

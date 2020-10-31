@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,12 +26,14 @@ public class WorkingActivity extends AppCompatActivity {
     TextView txt_name, txt_mac, txt_info;
     Button btn_connect, btn_step, btn_sleep, btn_heart, btn_disconnect;
     String TAG = "Working Activity";
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_working);
         findViewByIds();
+        progressBar.setVisibility(View.GONE);
 
     }
 
@@ -43,6 +46,7 @@ public class WorkingActivity extends AppCompatActivity {
         btn_sleep = findViewById(R.id.button_sleep);
         btn_heart = findViewById(R.id.button_heart);
         btn_disconnect = findViewById(R.id.button_disconnect);
+        progressBar = findViewById(R.id.progressBar);
 
         Intent intent = getIntent();
         String name = intent.getStringExtra("devicename");
@@ -50,12 +54,34 @@ public class WorkingActivity extends AppCompatActivity {
         txt_name.setText(name);
         txt_mac.setText(mac);
 
-        btn_connect.setOnClickListener(view ->
-                BluetoothSDK.connectByMAC(resultCallBack, txt_mac.getText().toString()));
-        btn_disconnect.setOnClickListener(view -> BluetoothSDK.disConnect(resultCallBack));
-        btn_step.setOnClickListener(view -> BluetoothSDK.getSportData(resultCallBack));
-        btn_sleep.setOnClickListener(view -> BluetoothSDK.getSleepData(resultCallBack));
-        btn_heart.setOnClickListener(view -> BluetoothSDK.getHeartRateData(resultCallBack));
+        btn_connect.setOnClickListener(view -> {
+            progressBar.setVisibility(View.VISIBLE);
+            Toast.makeText(WorkingActivity.this, "Connecting....", Toast.LENGTH_SHORT).show();
+            BluetoothSDK.connectByMAC(resultCallBack, txt_mac.getText().toString());
+        });
+        btn_disconnect.setOnClickListener(view -> {
+
+            Toast.makeText(WorkingActivity.this, "Đang tính toán....", Toast.LENGTH_SHORT).show();
+            BluetoothSDK.disConnect(resultCallBack);
+        });
+        btn_step.setOnClickListener(view -> {
+            progressBar.setVisibility(View.VISIBLE);
+            txt_info.setText("");
+            Toast.makeText(WorkingActivity.this, "Đang tính toán....", Toast.LENGTH_SHORT).show();
+            BluetoothSDK.getSportData(resultCallBack);
+        });
+        btn_sleep.setOnClickListener(view -> {
+            progressBar.setVisibility(View.VISIBLE);
+            txt_info.setText("");
+            Toast.makeText(WorkingActivity.this, "Đang tính toán....", Toast.LENGTH_SHORT).show();
+            BluetoothSDK.getSleepData(resultCallBack);
+        });
+        btn_heart.setOnClickListener(view -> {
+            progressBar.setVisibility(View.VISIBLE);
+            txt_info.setText("");
+            Toast.makeText(WorkingActivity.this, "Đang tính toán....", Toast.LENGTH_SHORT).show();
+            BluetoothSDK.getHeartRateData(resultCallBack);
+        });
     }
 
     ResultCallBack resultCallBack = new ResultCallBack() {
@@ -63,6 +89,7 @@ public class WorkingActivity extends AppCompatActivity {
         public void onSuccess(int resultType, Object[] objects) {
             switch (resultType) {
                 case ResultCallBack.TYPE_CONNECT:
+                    progressBar.setVisibility(View.INVISIBLE);
                     Toast.makeText(WorkingActivity.this, "connected", Toast.LENGTH_SHORT).show();
                     Log.i(TAG, "connected");
                     BluetoothSDK.setTransparentPassageCallBack(new ResultCallBack() {
@@ -87,7 +114,7 @@ public class WorkingActivity extends AppCompatActivity {
                     Log.i(TAG, "disconnected");
                     break;
                 case ResultCallBack.TYPE_GET_SLEEP_DATA:
-                    Toast.makeText(WorkingActivity.this, "Đang tính toán....", Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
                     if (objects == null || objects.length == 0) {
                         Toast.makeText(WorkingActivity.this, "No sleep data", Toast.LENGTH_SHORT).show();
                     } else {
@@ -98,7 +125,7 @@ public class WorkingActivity extends AppCompatActivity {
                     break;
 
                 case ResultCallBack.TYPE_GET_SPORT_DATA:
-                    Toast.makeText(WorkingActivity.this, "Đang tính toán....", Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
                     int total_step = 0;
                     int total_distance = 0;
                     int total_calorires = 0;
@@ -117,7 +144,7 @@ public class WorkingActivity extends AppCompatActivity {
                     }
                     break;
                 case ResultCallBack.TYPE_GET_HEART_RATE_DATA:
-                    Toast.makeText(WorkingActivity.this, "Đang tính toán....", Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
                     int total_heart_rate = 0;
                     if (objects == null || objects.length == 0) {
                         Toast.makeText(WorkingActivity.this, "No heart rate data", Toast.LENGTH_SHORT).show();
